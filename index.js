@@ -162,7 +162,7 @@ function createServer(opts) {
         await pify(pump)(reader(), record)
         await pify(rimraf)(dirname)
 
-        response.replicate(req)
+        response.replicate(res)
       } catch (err) {
         debug(err)
         return res.destroy(err)
