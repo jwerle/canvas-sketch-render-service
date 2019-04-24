@@ -1,0 +1,43 @@
+{
+  "name": "canvas-sketch-render-service",
+  "version": "0.0.1",
+  "description": "A HyperSource service based on HyperDrive that converts a Canvas Sketch project into production bundle.",
+  "main": "index.js",
+  "bin": "canvas-sketch-render-service",
+  "scripts": {
+    "test": ":"
+  },
+  "keywords": [
+    "hypersource",
+    "canvas",
+    "sketch",
+    "renderer",
+    "service",
+    "video",
+    "mp4"
+  ],
+  "author": "Joseph Were <joseph.werle@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@zeit/ncc": "^0.18.1",
+    "canvas-sketch-cli": "^1.5.0",
+    "debug": "^4.1.1",
+    "hyperdrive": "^9.14.5",
+    "hyperdrive-http": "^4.4.0",
+    "hypersource": "^0.1.1",
+    "minimist": "^1.2.0",
+    "mirror-folder": "^3.0.0",
+    "mkdir": "0.0.2",
+    "pify": "^4.0.1",
+    "pump": "^3.0.0",
+    "random-access-memory": "^3.1.1",
+    "rimraf": "^2.6.3",
+    "temp-dir": "^1.0.0"
+  },
+  "devDependencies": {
+    "canvas-sketch": "^0.3.0",
+    "canvas-sketch-util": "^1.8.0",
+    "get-uri": "^2.0.3",
+    "simple-websocket": "^7.2.0"
+  }
+}

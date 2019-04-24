@@ -1,0 +1,86 @@
+#!/usr/bin/env node
+
+const { createServer } = require('../')
+const hyperdrive = require('hyperdrive')
+const minimist = require('minimist')
+const TEMPDIR = require('temp-dir')
+const path = require('path')
+const ram = require('random-access-memory')
+
+const argv = minimist(process.argv.slice(2), {
+  string: [
+    'registry',
+    'data',
+    'host',
+  ],
+
+  number: [
+    'port',
+  ],
+
+  boolean: [
+    'version',
+    'debug',
+    'help',
+  ],
+
+  alias: {
+    registry: 'r',
+    version: 'V',
+    help: 'h',
+    host: 'H',
+    port: 'p',
+    data: 'd',
+  },
+
+  default: {
+    registry: './canvas-sketch-registry',
+    data: process.env.TEMPDIR || process.env.TMPDIR || TEMPDIR,
+    host: 'localhost',
+    port: 3000,
+  }
+})
+
+const usage = `usage: ${path.basename(process.argv[1])} [-hDV] [options]
+
+where options can be:
+
+  -r, --registry <path>   Path to HyperDrive registry
+  -d, --data <path>       Path to where temporary data cache
+  -p, --port <port>       Server port to listen on
+  -H, --host <host>       Server host to listen on
+  -D, --debug             Enable debug output
+  -h, --help              Show this message
+  -V, --version           Show program version
+`
+
+if (argv.help) {
+  console.log(usage)
+  process.exit(0)
+}
+
+argv.registry = path.resolve(argv.registry)
+argv.data = path.resolve(argv.data)
+
+console.log('Using registry at %s', argv.registry)
+console.log('Using TMPDIR at %s', argv.data)
+
+const registry = hyperdrive(argv.registry)
+const tmpdir = argv.data
+const server = createServer({ registry, tmpdir })
+
+server.listen(argv.port, argv.host, (err) => {
+  if (err) {
+    console.error(err.message)
+    server.destroy()
+    process.nextTick(process.exit, 1)
+  } else {
+    const info = server.address()
+    console.log(
+      'CanvasSketch render server listening on %s//%s:%s',
+      info.protocol,
+      info.address,
+      info.port
+    )
+  }
+})

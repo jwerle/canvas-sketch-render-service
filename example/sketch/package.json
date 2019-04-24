@@ -1,0 +1,12 @@
+{
+  "name": "sketch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "animated-grid.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas-sketch": "^0.3.0",
+    "canvas-sketch-util": "^1.8.0"
+  }
+}
