@@ -1,4 +1,5 @@
 const hyperdriveOverHTTP = require('hyperdrive-http')
+const hyperdiscovery = require('hyperdiscovery')
 const hyperdrive = require('hyperdrive')
 const { exec } = require('child_process')
 const TEMPDIR = require('temp-dir')
@@ -19,12 +20,18 @@ function createServer(opts) {
   const { registry } = opts
   const httpServer = opts.server || http.createServer()
   const tmpdir = opts.tmpdir || TEMPDIR
+  const swarm = false === opts.discovery ? null : hyperdiscovery(opts.discovery)
   const server = hs.createServer({ server: httpServer })
 
   httpServer.on('request', hyperdriveOverHTTP(registry))
   server.on('request', onrequest)
 
-  return Object.assign(server, { registry, http: httpServer })
+  swarm.on('error', debug)
+  registry.ready(() => {
+    swarm.add(registry)
+  })
+
+  return Object.assign(server, { registry, swarm, http: httpServer })
 
   function onrequest(req, res) {
     const response = hyperdrive(ram, res.key, { secretKey: res.secretKey })
