@@ -29,6 +29,14 @@ function createServer(opts) {
   swarm.on('error', debug)
   registry.ready(() => {
     swarm.add(registry)
+    registry.access('dat.json', (err) => {
+      if (err) {
+        registry.writeFile('dat.json', JSON.stringify({
+          title: 'canvas-sketch-render-service',
+          description: `dat://${registry.key.toString('hex')}`,
+        }))
+      }
+    })
   })
 
   return Object.assign(server, { registry, swarm, http: httpServer })
