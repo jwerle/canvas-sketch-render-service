@@ -37,6 +37,17 @@ function createServer(opts) {
         }))
       }
     })
+
+    registry.access('.well-known/dat', (err) => {
+      if (err) {
+        const wellKnown = [
+          `dat://${registry.key.toString('hex')} `,
+          'TTL=25920'
+        ].join('\n')
+
+        registry.writeFile('.well-known/dat', wellKnown)
+      }
+    })
   })
 
   return Object.assign(server, { registry, swarm, http: httpServer })
