@@ -6,6 +6,7 @@ const minimist = require('minimist')
 const TEMPDIR = require('temp-dir')
 const path = require('path')
 const ram = require('random-access-memory')
+const pkg = require('../package.json')
 
 const argv = minimist(process.argv.slice(2), {
   string: [
@@ -56,6 +57,11 @@ where options can be:
 
 if (argv.help) {
   console.log(usage)
+  process.exit(0)
+}
+
+if (argv.version) {
+  console.log(pkg.version)
   process.exit(0)
 }
 
