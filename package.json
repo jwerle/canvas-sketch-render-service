@@ -1,6 +1,6 @@
 {
   "name": "canvas-sketch-render-service",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A HyperSource service based on HyperDrive that converts a Canvas Sketch project into production bundle.",
   "main": "index.js",
   "bin": "canvas-sketch-render-service",
