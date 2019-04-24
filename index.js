@@ -170,6 +170,7 @@ function createServer(opts) {
         await pify(rimraf)(dirname)
 
         response.replicate(res)
+        swarm.rejoin(registry.discoveryKey)
       } catch (err) {
         debug(err)
         return res.destroy(err)
