@@ -3,7 +3,9 @@
   "version": "0.1.1",
   "description": "A HyperSource service based on HyperDrive that converts a Canvas Sketch project into production bundle.",
   "main": "index.js",
-  "bin": "bin/canvas-sketch-render-service",
+  "bin": {
+    "canvas-sketch-render-service": "bin/canvas-sketch-render-service"
+  },
   "scripts": {
     "test": ":"
   },
@@ -22,9 +24,10 @@
     "@zeit/ncc": "^0.18.1",
     "canvas-sketch-cli": "^1.5.0",
     "debug": "^4.1.1",
+    "hyperdiscovery": "^9.0.0",
     "hyperdrive": "^9.14.5",
     "hyperdrive-http": "^4.4.0",
-    "hypersource": "^0.1.1",
+    "hypersource": "^0.1.3",
     "minimist": "^1.2.0",
     "mirror-folder": "^3.0.0",
     "mkdir": "0.0.2",
@@ -39,5 +42,16 @@
     "canvas-sketch-util": "^1.8.0",
     "get-uri": "^2.0.3",
     "simple-websocket": "^7.2.0"
-  }
+  },
+  "directories": {
+    "example": "example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwerle/canvas-sketch-render-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jwerle/canvas-sketch-render-service/issues"
+  },
+  "homepage": "https://github.com/jwerle/canvas-sketch-render-service#readme"
 }
