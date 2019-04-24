@@ -83,10 +83,19 @@ server.listen(argv.port, argv.host, (err) => {
   } else {
     const info = server.address()
     console.log(
-      'CanvasSketch render server listening on %s//%s:%s',
+      'WebSocket server listening on %s//%s:%s',
       info.protocol,
       info.address,
       info.port
     )
+
+    registry.ready(() => {
+      if (server.swarm) {
+        console.log(
+          'Broadcasting to DAT network on dat://%s',
+          registry.key.toString('hex')
+        )
+      }
+    })
   }
 })
