@@ -78,7 +78,7 @@ const server = createServer({ registry, tmpdir })
 server.listen(argv.port, argv.host, (err) => {
   if (err) {
     console.error(err.message)
-    server.destroy()
+    server.close()
     process.nextTick(process.exit, 1)
   } else {
     const info = server.address()
