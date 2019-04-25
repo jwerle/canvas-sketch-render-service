@@ -9,7 +9,6 @@ const get = require('get-uri')
 const ram = require('random-access-memory')
 const fs = require('fs')
 
-const dirname = path.resolve('.', 'example/sketch')
 const bundle = hyperdrive(ram)
 
 const { SKETCH_HOST = 'ws://localhost:3000' } = process.env // try ws://canvas-sketch.cafe.network
@@ -97,7 +96,7 @@ bundle.ready(async () => {
         console.log('Did sync content from server', files)
       })
 
-      const output = path.resolve(dirname, 'build/')
+      const output = path.resolve(__dirname, 'build/')
 
       await pify(mkdirp)(output)
 
